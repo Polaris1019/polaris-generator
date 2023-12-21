@@ -16,12 +16,12 @@ public class StaticGenerator {
     public static void main(String[] args) {
         // 获取整个项目的根路径
         String projectPath = System.getProperty("user.dir");
-        File projectFile = new File(projectPath);
+        File projectFile = new File(projectPath).getParentFile();
         // 输入路径：ACM示例代码目录
         String inputPath = new File(projectFile, "polaris-generator-demo-projects/acm-template").getAbsolutePath();
         // 输出路径：polaris-generator-basic
         String outputPath = projectPath;
-        copyFilesByHutool(inputPath, outputPath);
+        copyFilesByRecursive(inputPath, outputPath);
     }
 
     /**

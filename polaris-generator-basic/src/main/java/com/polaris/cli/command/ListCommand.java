@@ -17,7 +17,7 @@ public class ListCommand implements Runnable {
         //当前根路径 D:\JAVA\code\polaris-generator\polaris-generator
         String projectPath = System.getProperty("user.dir");
 
-        File parentFile = new File(projectPath);
+        File parentFile = new File(projectPath).getParentFile();
         // 输入路径
         String inputPath = new File(parentFile, "polaris-generator-demo-projects/acm-template").getAbsolutePath();
         List<File> files = FileUtil.loopFiles(inputPath);

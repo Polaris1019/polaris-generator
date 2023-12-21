@@ -31,16 +31,15 @@ public class MainGenerator {
     public static void doGenerate(Object model) throws TemplateException, IOException, freemarker.template.TemplateException {
         // 获取整个项目的根路径
         String projectPath = System.getProperty("user.dir");
-        File projectFile = new File(projectPath);
-//        File projectFile = new File(projectPath).getParentFile();
+        File projectFile = new File(projectPath).getParentFile();
         // 输入路径：ACM示例代码目录
         String inputPath = new File(projectFile, "polaris-generator-demo-projects/acm-template").getAbsolutePath();
         // 输出路径：polaris-generator-basic
         String outputPath = projectPath;
         copyFilesByRecursive(inputPath, outputPath);
         // 生成动态文件，会覆盖部分已生成的静态文件
-        String inputDynamicFilePath = projectPath + File.separator + "polaris-generator-basic" + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
-//        String inputDynamicFilePath = projectPath + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
+//        String inputDynamicFilePath = projectPath + File.separator + "polaris-generator-basic" + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
+        String inputDynamicFilePath = projectPath + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
         String outputDynamicFilePath = projectPath + File.separator + "acm-template/src/com/yupi/acm/MainTemplate.java";
         DynamicGenerator.doGenerate(inputDynamicFilePath, outputDynamicFilePath, model);
     }

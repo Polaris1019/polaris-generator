@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 public class DynamicGenerator {
     public static void main(String[] args) throws freemarker.template.TemplateException, IOException {
         // 当前idea打开的窗口
-        String projectPath = System.getProperty("user.dir") + File.separator + "polaris-generator-basic";
+        String projectPath = System.getProperty("user.dir");
         String inputPath = projectPath + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
         String outputPath = projectPath + File.separator + "MainTemplate.java";
         MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
@@ -49,7 +49,7 @@ public class DynamicGenerator {
 
         // 创建模板对象，加载指定模板
         String templateName = new File(inputPath).getName();
-        Template template = configuration.getTemplate(templateName,"utf-8");
+        Template template = configuration.getTemplate(templateName, "utf-8");
 
         // 生成
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(Paths.get(outputPath)), StandardCharsets.UTF_8));
