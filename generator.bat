@@ -1,0 +1,2 @@
+@echo off
+java -jar polaris-generator-basic-1.0-SNAPSHOT-jar-with-dependencies.jar %*

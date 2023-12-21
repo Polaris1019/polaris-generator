@@ -21,7 +21,7 @@ public class StaticGenerator {
         String inputPath = new File(projectFile, "polaris-generator-demo-projects/acm-template").getAbsolutePath();
         // 输出路径：polaris-generator-basic
         String outputPath = projectPath;
-        copyFilesByRecursive(inputPath, outputPath);
+        copyFilesByHutool(inputPath, outputPath);
     }
 
     /**
