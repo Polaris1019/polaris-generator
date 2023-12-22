@@ -14,6 +14,10 @@ public class MetaManager {
      */
     private static volatile Meta meta;
 
+    private MetaManager() {
+        // 私有构造函数，防止外部实例化
+    }
+
     /**
      * 双检锁实现单例模式
      */
@@ -30,10 +34,11 @@ public class MetaManager {
     }
 
     // 私有构造函数，防止外部用new的方式创建出多个对象
-    private static Meta initMeta(){
+    private static Meta initMeta() {
         String metaJson = ResourceUtil.readUtf8Str("meta.json");
         Meta newMeta = JSONUtil.toBean(metaJson, Meta.class);
         // todo 校验配置文件，处理默认值
         return newMeta;
     }
+
 }
