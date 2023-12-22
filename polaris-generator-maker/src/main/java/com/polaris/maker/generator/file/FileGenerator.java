@@ -1,25 +1,25 @@
-package com.polaris.generator;
+package com.polaris.maker.generator.file;
 
 import cn.hutool.extra.template.TemplateException;
-import com.polaris.model.MainTemplateConfig;
+import com.polaris.maker.model.DataModel;
 
 import java.io.File;
 import java.io.IOException;
 
-import static com.polaris.generator.StaticGenerator.copyFilesByRecursive;
+import static com.polaris.maker.generator.file.StaticFileGenerator.copyFilesByHutool;
 
 /**
  * 核心生成器
  *
  * @author MXD
  */
-public class MainGenerator {
+public class FileGenerator {
     public static void main(String[] args) throws freemarker.template.TemplateException, IOException {
-        MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
-        mainTemplateConfig.setAuthor("polaris");
-        mainTemplateConfig.setLoop(false);
-        mainTemplateConfig.setOutputText("结果：");
-        doGenerate(mainTemplateConfig);
+        DataModel dataModel = new DataModel();
+        dataModel.setAuthor("polaris");
+        dataModel.setLoop(false);
+        dataModel.setOutputText("结果：");
+        doGenerate(dataModel);
     }
 
     /**
@@ -36,10 +36,10 @@ public class MainGenerator {
         String inputPath = new File(projectFile, "polaris-generator-demo-projects/acm-template").getAbsolutePath();
         // 输出路径：polaris-generator-basic
         String outputPath = projectPath;
-        copyFilesByRecursive(inputPath, outputPath);
+        copyFilesByHutool(inputPath, outputPath);
         // 生成动态文件，会覆盖部分已生成的静态文件
         String inputDynamicFilePath = projectPath + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
         String outputDynamicFilePath = projectPath + File.separator + "acm-template/src/com/yupi/acm/MainTemplate.java";
-        DynamicGenerator.doGenerate(inputDynamicFilePath, outputDynamicFilePath, model);
+        DynamicFileGenerator.doGenerate(inputDynamicFilePath, outputDynamicFilePath, model);
     }
 }
