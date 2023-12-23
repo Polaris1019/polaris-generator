@@ -6,7 +6,6 @@ import com.polaris.model.MainTemplateConfig;
 import java.io.File;
 import java.io.IOException;
 
-import static com.polaris.generator.StaticGenerator.copyFilesByRecursive;
 
 /**
  * 核心生成器
@@ -29,17 +28,23 @@ public class MainGenerator {
      * @throws freemarker.template.TemplateException
      */
     public static void doGenerate(Object model) throws TemplateException, IOException, freemarker.template.TemplateException {
-        // 获取整个项目的根路径
-        String projectPath = System.getProperty("user.dir");
-        File projectFile = new File(projectPath).getParentFile();
-        // 输入路径：ACM示例代码目录
-        String inputPath = new File(projectFile, "polaris-generator-demo-projects/acm-template").getAbsolutePath();
-        // 输出路径：polaris-generator-basic
-        String outputPath = projectPath;
-        copyFilesByRecursive(inputPath, outputPath);
-        // 生成动态文件，会覆盖部分已生成的静态文件
-        String inputDynamicFilePath = projectPath + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
-        String outputDynamicFilePath = projectPath + File.separator + "acm-template/src/com/yupi/acm/MainTemplate.java";
-        DynamicGenerator.doGenerate(inputDynamicFilePath, outputDynamicFilePath, model);
+        String inputRootPath = "D:\\JAVA\\code\\polaris-generator\\polaris-generator\\polaris-generator-demo-projects\\acm-template-pro";
+        String outputRootPath = "D:\\JAVA\\code\\polaris-generator\\polaris-generator\\acm-template-pro";
+
+        String inputPath;
+        String outputPath;
+
+        inputPath = new File(inputRootPath, "src/com/polaris/acm/MainTemplate.java.ftl").getAbsolutePath();
+        outputPath = new File(outputRootPath, "src/com/polaris/acm/MainTemplate.java").getAbsolutePath();
+        DynamicGenerator.doGenerate(inputPath, outputPath, model);
+
+        inputPath = new File(inputRootPath, ".gitignore").getAbsolutePath();
+        outputPath = new File(outputRootPath, ".gitignore").getAbsolutePath();
+        StaticGenerator.copyFilesByHutool(inputPath, outputPath);
+
+        inputPath = new File(inputRootPath, "READMD.md").getAbsolutePath();
+        outputPath = new File(outputRootPath, "READMD.md").getAbsolutePath();
+        StaticGenerator.copyFilesByHutool(inputPath, outputPath);
+
     }
 }

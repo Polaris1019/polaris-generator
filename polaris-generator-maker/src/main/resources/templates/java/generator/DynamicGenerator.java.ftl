@@ -1,9 +1,9 @@
-package com.polaris.maker.generator.file;
+package ${basePackage}.generator;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.extra.template.TemplateException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -12,10 +12,8 @@ import java.nio.file.Paths;
 
 /**
  * 动态文件生成
- *
- * @author MXD
  */
-public class DynamicFileGenerator {
+public class DynamicGenerator {
 
     /**
      * @param inputPath  模板文件输入路径
@@ -49,10 +47,6 @@ public class DynamicFileGenerator {
         // 生成
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(Paths.get(outputPath)), StandardCharsets.UTF_8));
         template.process(model, out);
-
-//        //生成（鱼皮原本代码）
-//        Writer out = new FileWriter(outputPath);
-//        template.process(model, out);
 
         // 生成后关闭文件
         out.close();

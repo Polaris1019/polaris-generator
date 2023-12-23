@@ -6,13 +6,13 @@
   "author": "polaris",
   "createTime": "2023-12-22",
   "fileConfig": {
-    "inputRootPath": "/Users/yupi/Code/yuzi-generator/yuzi-generator-demo-projects/acm-template-pro",
+    "inputRootPath": "D:/JAVA/code/polaris-generator/polaris-generator/polaris-generator-demo-projects/acm-template-pro",
     "outputRootPath": "generated",
     "type": "dir",
     "files": [
       {
-        "inputPath": "src/com/yupi/acm/MainTemplate.java.ftl",
-        "outputPath": "src/com/yupi/acm/MainTemplate.java",
+        "inputPath": "src/com/polaris/acm/MainTemplate.java.ftl",
+        "outputPath": "src/com/polaris/acm/MainTemplate.java",
         "type": "file",
         "generateType": "dynamic"
       },
@@ -43,7 +43,7 @@
         "fieldName": "author",
         "type": "String",
         "description": "作者注释",
-        "defaultValue": "yupi",
+        "defaultValue": "polaris",
         "abbr": "a"
       },
       {
