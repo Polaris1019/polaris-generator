@@ -6,8 +6,9 @@
   "author": "polaris",
   "createTime": "2023-12-22",
   "fileConfig": {
-    "inputRootPath": "D:/JAVA/code/polaris-generator/polaris-generator/polaris-generator-demo-projects/acm-template-pro",
+    "inputRootPath": ".source/acm-template-pro",
     "outputRootPath": "generated",
+    "sourceRootPath": "D:/JAVA/code/polaris-generator/polaris-generator/polaris-generator-demo-projects/acm-template-pro",
     "type": "dir",
     "files": [
       {

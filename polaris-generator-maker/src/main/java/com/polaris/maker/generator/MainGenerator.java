@@ -26,6 +26,12 @@ public class MainGenerator {
             FileUtil.mkdir(outputPath);
         }
 
+        //第五期：复制原始文件
+        String sourceRootPath = meta.getFileConfig().getSourceRootPath();
+        //将模板文件复制到项目目录下
+        String sourceCopyDestPath = outputPath + File.separator + ".source";
+        FileUtil.copy(sourceRootPath, sourceCopyDestPath, false);
+
         //读取resource目录
         ClassPathResource classPathResource = new ClassPathResource("");
         String inputResourcePath = classPathResource.getAbsolutePath();
