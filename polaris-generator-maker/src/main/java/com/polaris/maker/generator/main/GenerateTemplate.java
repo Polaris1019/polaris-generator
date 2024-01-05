@@ -3,6 +3,8 @@ package com.polaris.maker.generator.main;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.resource.ClassPathResource;
 import cn.hutool.core.util.StrUtil;
+import com.polaris.maker.generator.JarGenerator;
+import com.polaris.maker.generator.ScriptGenerator;
 import com.polaris.maker.generator.file.DynamicFileGenerator;
 import com.polaris.maker.meta.Meta;
 import com.polaris.maker.meta.MetaManager;

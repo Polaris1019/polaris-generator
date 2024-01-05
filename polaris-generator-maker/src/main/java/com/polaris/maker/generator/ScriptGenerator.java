@@ -1,4 +1,4 @@
-package com.polaris.maker.generator.main;
+package com.polaris.maker.generator;
 
 import cn.hutool.core.io.FileUtil;
 
