@@ -1,4 +1,4 @@
-package com.polaris.maker.generator;
+package com.polaris.maker.generator.main;
 
 import java.io.*;
 import java.util.Map;
