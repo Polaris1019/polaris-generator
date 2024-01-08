@@ -17,32 +17,31 @@ import java.io.IOException;
  * @author MXD
  */
 public abstract class GenerateTemplate {
+
     public void doGenerate() throws TemplateException, IOException, InterruptedException {
         Meta meta = MetaManager.getMetaObject();
-        System.out.println(meta);
 
-        //1.输出根路径
+        //输出根路径
         String projectPath = System.getProperty("user.dir");
         String outputPath = projectPath + File.separator + "generated" + File.separator + meta.getName();
         if (!FileUtil.exist(outputPath)) {
             FileUtil.mkdir(outputPath);
         }
 
-        //2.复制原始文件
+        //1.复制原始文件
         String sourceCopyDestPath = copySource(meta, outputPath);
 
-        //3.代码生成
+        // 2.代码生成
         generateCode(meta, outputPath);
 
-        //4.构建 jar 包
+        // 3.构建 jar 包
         String jarPath = buildJar(meta, outputPath);
 
-        //5.封装脚本
+        // 4.封装脚本
         String shellOutputFilePath = buildScript(outputPath, jarPath);
 
-        //6.生成精简版的程序（产物包）
+        // 5.生成精简版的程序（产物包）
         buildDist(outputPath, sourceCopyDestPath, jarPath, shellOutputFilePath);
-
     }
 
     /**
@@ -53,8 +52,7 @@ public abstract class GenerateTemplate {
      * @param jarPath
      * @param shellOutputFilePath
      */
-    protected void buildDist(String outputPath, String sourceCopyDestPath, String jarPath, String
-            shellOutputFilePath) {
+    protected void buildDist(String outputPath, String sourceCopyDestPath, String jarPath, String shellOutputFilePath) {
         String distOutputPath = outputPath + "-dist";
         //  - 拷贝jar包
         String targetAbsolutePath = distOutputPath + File.separator + "target";
@@ -67,7 +65,6 @@ public abstract class GenerateTemplate {
         //  - 拷贝模板文件
         FileUtil.copy(sourceCopyDestPath, distOutputPath, true);
     }
-
 
     /**
      * 封装脚本
@@ -83,7 +80,6 @@ public abstract class GenerateTemplate {
         return shellOutputFilePath;
     }
 
-
     /**
      * 构建 jar 包
      *
@@ -98,7 +94,6 @@ public abstract class GenerateTemplate {
         return jarPath;
     }
 
-
     /**
      * 代码生成
      *
@@ -108,30 +103,26 @@ public abstract class GenerateTemplate {
      * @throws TemplateException
      */
     protected void generateCode(Meta meta, String outputPath) throws IOException, TemplateException {
-        // 读取resources目录
+        //读取resource目录
         ClassPathResource classPathResource = new ClassPathResource("");
         String inputResourcePath = classPathResource.getAbsolutePath();
 
-        // Java包的基础路径
-        // com.polaris
+        //java包的基本路径
+        //com.polaris
         String outputBasePackage = meta.getBasePackage();
-        // com/polaris
+        //com/polaris
         String outputBasePackagePath = StrUtil.join("/", StrUtil.split(outputBasePackage, "."));
-        // generated/acm-template-pro-generator/src/main/java/com/polaris
+        //generated/acm-template-pro-generator/src/main/java/com/polaris
         String outputBaseJavaPackagePath = outputPath + File.separator + "src/main/java" + File.separator + outputBasePackagePath;
 
         String inputFilePath;
         String outputFilePath;
 
-        // model.DataModel
+        //model.DataModel
         inputFilePath = inputResourcePath + File.separator + "templates/java/model/DataModel.java.ftl";
         outputFilePath = outputBaseJavaPackagePath + File.separator + "/model/DataModel.java";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
-        // cli.command.GenerateCommand
-        inputFilePath = inputResourcePath + File.separator + "templates/java/cli/command/GenerateCommand.java.ftl";
-        outputFilePath = outputBaseJavaPackagePath + File.separator + "/cli/command/GenerateCommand.java";
-        DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
         // cli.command.ConfigCommand
         inputFilePath = inputResourcePath + File.separator + "templates/java/cli/command/ConfigCommand.java.ftl";
@@ -158,20 +149,22 @@ public abstract class GenerateTemplate {
         outputFilePath = outputBaseJavaPackagePath + "/Main.java";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
+
         // generator.StaticFileGenerator
-        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/StaticFileGenerator.java.ftl";
-        outputFilePath = outputBaseJavaPackagePath + "/generator/StaticFileGenerator.java";
+        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/StaticGenerator.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/generator/StaticGenerator.java";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
         // generator.DynamicFileGenerator
-        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/DynamicFileGenerator.java.ftl";
-        outputFilePath = outputBaseJavaPackagePath + "/generator/DynamicFileGenerator.java";
+        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/DynamicGenerator.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/generator/DynamicGenerator.java";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
 
-        // generator.MainGenerator
-        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/FileGenerator.java.ftl";
-        outputFilePath = outputBaseJavaPackagePath + "/generator/FileGenerator.java";
+        // generator.FileGenerator
+        inputFilePath = inputResourcePath + File.separator + "templates/java/generator/MainGenerator.java.ftl";
+        outputFilePath = outputBaseJavaPackagePath + "/generator/MainGenerator.java";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
+
 
         // pom.xml
         inputFilePath = inputResourcePath + File.separator + "templates/pom.xml.ftl";
@@ -183,7 +176,6 @@ public abstract class GenerateTemplate {
         outputFilePath = outputPath + File.separator + "README.md";
         DynamicFileGenerator.doGenerate(inputFilePath, outputFilePath, meta);
     }
-
 
     /**
      * 复制原始的模板文件到项目目录下
@@ -198,4 +190,5 @@ public abstract class GenerateTemplate {
         FileUtil.copy(sourceRootPath, sourceCopyDestPath, false);
         return sourceCopyDestPath;
     }
+
 }

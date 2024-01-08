@@ -6,6 +6,7 @@ package com.polaris.maker.meta.enums;
  * @author MXD
  */
 public enum FileGenerateTypeEnum {
+
     DYNAMIC("动态", "dynamic"),
     STATIC("静态", "static");
 

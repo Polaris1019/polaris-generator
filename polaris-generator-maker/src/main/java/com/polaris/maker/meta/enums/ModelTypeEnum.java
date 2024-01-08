@@ -5,7 +5,6 @@ package com.polaris.maker.meta.enums;
  *
  * @author MXD
  */
-
 public enum ModelTypeEnum {
 
     STRING("字符串", "String"),

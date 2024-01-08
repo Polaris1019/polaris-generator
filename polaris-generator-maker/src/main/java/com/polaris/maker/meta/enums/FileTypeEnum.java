@@ -6,6 +6,7 @@ package com.polaris.maker.meta.enums;
  * @author MXD
  */
 public enum FileTypeEnum {
+
     DIR("目录", "dir"),
     FILE("文件", "file");
 
